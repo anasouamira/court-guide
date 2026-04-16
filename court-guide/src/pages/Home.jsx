@@ -9,9 +9,8 @@ import services from "../data/services.json";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [query] = useState(""); // removed Search dependency safely
+  const [query] = useState("");
 
-  // SAFE fallback (prevents crash if services is broken)
   const safeServices = Array.isArray(services) ? services : [];
 
   const filtered = safeServices.filter((s) => {
@@ -27,42 +26,25 @@ const Home = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-28">
+    <div className="min-h-screen bg-gray-50 pb-36 lg:pb-32">
+      <Header />
 
-      {/* ── HEADER ── */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-500 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center text-center">
-          <Header />
-        </div>
-      </div>
-
-      {/* ── MAIN ── */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 py-10">
-
-        {/* TITLE CENTERED */}
-        <div className="mb-10 text-center">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+        <div className="mb-8 border-b border-gray-200 pb-5 text-center sm:mb-10 sm:text-left">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">
             Available Services
           </h2>
-          <p className="text-gray-700 text-sm mt-1">
-            Choose a service to continue
+          <p className="mt-1 text-sm text-gray-600">
+            Choose one service to view clear next steps.
           </p>
         </div>
 
-        {/* GRID */}
         {filtered.length > 0 ? (
-          <div className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            xl:grid-cols-4
-            gap-5
-          ">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((service) => (
               <div
                 key={service.id}
-                className="hover:scale-[1.02] transition duration-200"
+                className="h-full transition-transform duration-200 hover:scale-[1.01]"
               >
                 <Card
                   service={service}
@@ -72,27 +54,23 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center text-3xl mb-4">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
+            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-3xl">
               🔎
             </div>
-            <p className="text-gray-700 font-medium text-sm">
-              No services found
-            </p>
+            <p className="text-sm font-medium text-gray-700">No services found</p>
           </div>
         )}
       </main>
 
-      {/* ── CHATBOT (FIXED + BIGGER + SAFE) ── */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-center px-4">
-        <div className="w-full max-w-xl lg:w-[520px]">
+      <div className="fixed bottom-4 left-0 right-0 z-40 flex justify-center px-4">
+        <div className="w-full max-w-2xl lg:max-w-3xl">
           <Chatbot
             services={safeServices}
             onNavigate={(id) => navigate(`/service/${id}`)}
           />
         </div>
       </div>
-
     </div>
   );
 };
