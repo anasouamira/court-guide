@@ -1,0 +1,42 @@
+/* App.css */
+/* Minimal app-level styles — Tailwind handles most of the UI.
+   Add overrides here only when Tailwind utilities fall short. */
+
+/* ── Scrollbar (desktop) ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: 999px;
+}
+
+/* ── Focus ring — accessible but not intrusive ───────────────────────────── */
+:focus-visible {
+  outline: 2px solid #2563eb; /* blue-600 */
+  outline-offset: 2px;
+}
+
+/* ── Remove default button / input browser styles ───────────────────────── */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+/* ── Tap highlight on mobile ─────────────────────────────────────────────── */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Sticky chatbot safe-area on notched phones (iPhone X+) ─────────────── */
+.chatbot-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

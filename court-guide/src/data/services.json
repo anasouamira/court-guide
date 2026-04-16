@@ -1,0 +1,96 @@
+[
+  {
+    "id": "lawsuit",
+    "title": "File a Lawsuit",
+    "icon": "📄",
+    "description": "Start a new civil case",
+    "keywords": ["lawsuit", "sue", "file", "case", "civil", "claim", "plaintiff", "court case"],
+    "steps": [
+      "Go to the Civil Registry office on Floor 1, Room 102.",
+      "Fill in the lawsuit form (Form C-01). Staff can assist you.",
+      "Attach all required documents (see list below).",
+      "Pay the filing fee at the Finance desk, Floor 1, Room 105.",
+      "Receive your case number and first hearing date."
+    ],
+    "documents": [
+      "National ID or passport (original + copy)",
+      "Completed lawsuit form (Form C-01)",
+      "Evidence supporting your claim (contracts, receipts, photos)",
+      "Power of attorney (if filing through a lawyer)",
+      "Filing fee receipt"
+    ],
+    "location": [
+      { "office": "Civil Registry", "floor": 1, "room": "102", "notes": "Main entrance, turn left" },
+      { "office": "Finance Desk", "floor": 1, "room": "105", "notes": "Next to the elevator" }
+    ]
+  },
+  {
+    "id": "divorce",
+    "title": "Divorce",
+    "icon": "⚖️",
+    "description": "File for separation or divorce",
+    "keywords": ["divorce", "separation", "marriage", "separate", "spouse", "husband", "wife", "split"],
+    "steps": [
+      "Visit the Family Affairs office on Floor 2, Room 201.",
+      "Request and complete the Divorce Application form (Form F-03).",
+      "Submit required documents at the reception desk.",
+      "A hearing date will be scheduled — you will receive an SMS confirmation.",
+      "Attend the hearing with your lawyer or representative."
+    ],
+    "documents": [
+      "National ID or passport (both spouses, original + copy)",
+      "Original marriage certificate",
+      "Completed divorce application form (Form F-03)",
+      "Proof of address (utility bill or rental contract)",
+      "Power of attorney (if represented by a lawyer)"
+    ],
+    "location": [
+      { "office": "Family Affairs", "floor": 2, "room": "201", "notes": "Take elevator to Floor 2, first door on the right" }
+    ]
+  },
+  {
+    "id": "complaint",
+    "title": "Complaint",
+    "icon": "🧾",
+    "description": "Submit a formal complaint",
+    "keywords": ["complaint", "report", "grievance", "problem", "dispute", "issue", "complain", "notify"],
+    "steps": [
+      "Go to the Complaints & Petitions desk, Floor 1, Room 108.",
+      "Explain your complaint to the officer on duty.",
+      "Complete the Complaint Registration form (Form G-02).",
+      "Attach any supporting evidence.",
+      "You will receive a complaint reference number for follow-up."
+    ],
+    "documents": [
+      "National ID or passport (original + copy)",
+      "Completed complaint form (Form G-02)",
+      "Any supporting documents (photos, contracts, correspondence)",
+      "Witness information (if applicable)"
+    ],
+    "location": [
+      { "office": "Complaints & Petitions", "floor": 1, "room": "108", "notes": "Ground floor, near the main information board" }
+    ]
+  },
+  {
+    "id": "tracking",
+    "title": "Case Tracking",
+    "icon": "📂",
+    "description": "Check the status of your case",
+    "keywords": ["track", "status", "follow", "case number", "hearing", "update", "progress", "check", "my case"],
+    "steps": [
+      "Have your case number ready (found on your receipt or confirmation SMS).",
+      "Visit the Information Desk, Floor 1, Room 101.",
+      "Give your case number to the officer.",
+      "They will print or show you the current status and next hearing date.",
+      "Alternatively, use the self-service kiosk in the main hall."
+    ],
+    "documents": [
+      "Case reference number (from receipt or SMS)",
+      "National ID or passport (for identity verification)"
+    ],
+    "location": [
+      { "office": "Information Desk", "floor": 1, "room": "101", "notes": "Immediately to the right of the main entrance" },
+      { "office": "Self-Service Kiosk", "floor": 1, "room": "Main Hall", "notes": "Near the entrance — no waiting required" }
+    ]
+  }
+]
