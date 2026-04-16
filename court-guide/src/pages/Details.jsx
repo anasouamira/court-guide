@@ -3,39 +3,19 @@ import Header from "../components/Header";
 import services from "../data/services.json";
 
 const SectionCard = ({ icon, label, children }) => (
-  <div className="
-    bg-white/80 backdrop-blur-md
-    rounded-3xl border border-gray-100
-    shadow-sm hover:shadow-md
-    transition duration-200
-    overflow-hidden mb-5
-  ">
-    {/* Header */}
-    <div className="
-      flex items-center gap-3
-      px-5 py-4 border-b border-gray-50
-    ">
-      <div className="
-        w-9 h-9 rounded-xl
-        bg-blue-50 text-blue-600
-        flex items-center justify-center
-        text-lg
-      ">
+  <section className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+    <div className="flex items-center gap-3 border-b border-gray-100 px-4 py-3 sm:px-5">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-lg text-blue-700">
         {icon}
       </div>
 
-      <h2 className="
-        text-xs font-semibold text-gray-500 uppercase tracking-wider
-      ">
+      <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
         {label}
       </h2>
     </div>
 
-    {/* Body */}
-    <div className="px-5 py-4">
-      {children}
-    </div>
-  </div>
+    <div className="px-4 py-4 sm:px-5">{children}</div>
+  </section>
 );
 
 const Details = () => {
@@ -45,24 +25,17 @@ const Details = () => {
 
   if (!service) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 text-center">
-        <div className="w-20 h-20 bg-gray-100 rounded-3xl flex items-center justify-center text-4xl mb-5">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-6 text-center">
+        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-3xl bg-gray-100 text-4xl">
           🏛️
         </div>
-        <h1 className="text-xl font-bold text-gray-800 mb-2">
-          Service not found
-        </h1>
-        <p className="text-gray-400 text-sm mb-8 max-w-xs">
+        <h1 className="mb-2 text-xl font-bold text-gray-800">Service not found</h1>
+        <p className="mb-8 max-w-xs text-sm text-gray-500">
           The service you are looking for does not exist or has moved.
         </p>
         <button
           onClick={() => navigate("/")}
-          className="
-            bg-blue-600 text-white text-sm font-semibold
-            px-6 py-3 rounded-2xl
-            hover:bg-blue-700 active:scale-95 transition
-            shadow-md
-          "
+          className="rounded-2xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700 active:scale-95"
         >
           ← Back to Home
         </button>
@@ -71,105 +44,67 @@ const Details = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pb-12">
-
-      {/* Header */}
+    <div className="min-h-screen bg-gray-50 pb-12">
       <Header
         title={service.title}
         subtitle="Follow the steps below to complete your request"
         showIcon={false}
       />
 
-      {/* Back button */}
-      <div className="max-w-5xl mx-auto px-4 pt-5">
-        <button
-          onClick={() => navigate("/")}
-          className="
-            text-sm font-medium text-blue-600
-            bg-blue-50 hover:bg-blue-100
-            px-4 py-2 rounded-xl
-            transition active:scale-95
-          "
-        >
-          ← Back
-        </button>
-      </div>
+      <main className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="mb-6">
+          <button
+            onClick={() => navigate("/")}
+            className="rounded-xl bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition hover:bg-blue-100 active:scale-95"
+          >
+            ← Back
+          </button>
+        </div>
 
-      {/* Content */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-6">
+        <div className="grid gap-5">
+          <SectionCard icon="📌" label="Steps">
+            <ol className="space-y-4">
+              {service.steps.map((step, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold text-white">
+                    {i + 1}
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-700">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
 
-        {/* Steps */}
-        <SectionCard icon="📌" label="Steps">
-          <ol className="space-y-4">
-            {service.steps.map((step, i) => (
-              <li key={i} className="flex gap-4">
-                <div className="
-                  w-7 h-7 rounded-xl
-                  bg-blue-600 text-white
-                  flex items-center justify-center
-                  text-xs font-bold
-                ">
-                  {i + 1}
-                </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {step}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </SectionCard>
+          <SectionCard icon="📄" label="Documents">
+            <ul className="space-y-3">
+              {service.documents.map((doc, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-green-50 text-xs text-green-700">
+                    ✓
+                  </span>
+                  <span className="text-sm text-gray-700">{doc}</span>
+                </li>
+              ))}
+            </ul>
+          </SectionCard>
 
-        {/* Documents */}
-        <SectionCard icon="📄" label="Documents">
-          <ul className="space-y-3">
-            {service.documents.map((doc, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="
-                  w-5 h-5 rounded-lg
-                  bg-green-50 text-green-600
-                  flex items-center justify-center text-xs
-                ">
-                  ✓
-                </span>
-                <span className="text-sm text-gray-700">
-                  {doc}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </SectionCard>
-
-        {/* Location */}
-        <SectionCard icon="📍" label="Location">
-          <div className="space-y-3">
-            {service.location.map((loc, i) => (
-              <div
-                key={i}
-                className="
-                  bg-gray-50 hover:bg-gray-100
-                  border border-gray-100
-                  rounded-2xl px-4 py-4
-                  transition
-                "
-              >
-                <p className="text-sm font-semibold text-gray-800">
-                  {loc.office}
-                </p>
-
-                <p className="text-xs text-gray-500 mt-1">
-                  Floor {loc.floor} · Room {loc.room}
-                </p>
-
-                {loc.notes && (
-                  <p className="text-xs text-gray-400 mt-2">
-                    {loc.notes}
+          <SectionCard icon="📍" label="Location">
+            <div className="grid gap-3">
+              {service.location.map((loc, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"
+                >
+                  <p className="text-sm font-semibold text-gray-900">{loc.office}</p>
+                  <p className="mt-1 text-xs text-gray-600">
+                    Floor {loc.floor} · Room {loc.room}
                   </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </SectionCard>
-
+                  {loc.notes && <p className="mt-2 text-xs text-gray-500">{loc.notes}</p>}
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
       </main>
     </div>
   );

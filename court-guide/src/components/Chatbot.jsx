@@ -11,12 +11,7 @@ const Chatbot = ({ services = [], onNavigate }) => {
 
     const matched = matchService(trimmed, services);
 
-    setResponse(
-      matched
-        ? { type: "match", service: matched }
-        : { type: "nomatch" }
-    );
-
+    setResponse(matched ? { type: "match", service: matched } : { type: "nomatch" });
     setInput("");
   };
 
@@ -25,87 +20,76 @@ const Chatbot = ({ services = [], onNavigate }) => {
   };
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-50 px-4 flex justify-center">
-
-      {/* FLOATING PANEL */}
-      <div className="w-full max-w-3xl">
-
-        {/* RESPONSE */}
-        {response && (
-          <div className="mb-3 rounded-2xl bg-white/90 backdrop-blur border border-gray-200 shadow-xl px-4 py-4">
-            
-            {response.type === "match" ? (
-              <div className="flex items-center justify-between gap-4">
-                
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-lg">
-                    {response.service.icon}
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-gray-400">
-                      Service found
-                    </p>
-                    <p className="text-sm font-semibold text-gray-800">
-                      {response.service.title}
-                    </p>
-                  </div>
+    <div className="w-full">
+      {response && (
+        <div className="mb-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-lg">
+          {response.type === "match" ? (
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                  {response.service.icon}
                 </div>
 
-                <button
-                  onClick={() => {
-                    onNavigate(response.service.id);
-                    setResponse(null);
-                  }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl active:scale-95 transition"
-                >
-                  Open →
-                </button>
+                <div>
+                  <p className="text-xs text-gray-500">Service found</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {response.service.title}
+                  </p>
+                </div>
               </div>
-            ) : (
-              <p className="text-sm text-gray-600">
-                I didn’t find a match. Please choose a service from above.
-              </p>
-            )}
 
-            <button
-              onClick={() => setResponse(null)}
-              className="text-xs text-gray-400 hover:text-gray-600 mt-2"
-            >
-              Dismiss
-            </button>
-          </div>
-        )}
-
-        {/* INPUT PANEL */}
-        <div className="bg-white/90 backdrop-blur border border-gray-200 shadow-2xl rounded-2xl px-3 py-3">
-          <div className="flex items-center gap-2">
-
-            {/* ICON */}
-            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-lg">
-              💬
+              <button
+                onClick={() => {
+                  onNavigate(response.service.id);
+                  setResponse(null);
+                }}
+                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 active:scale-95"
+              >
+                Open service
+              </button>
             </div>
+          ) : (
+            <p className="text-sm text-gray-700">
+              I couldn’t find a direct match. Please select a service card above.
+            </p>
+          )}
 
-            {/* INPUT */}
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask a question about court services..."
-              className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            {/* BUTTON */}
-            <button
-              onClick={handleSend}
-              disabled={!input.trim()}
-              className="w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-gray-200 flex items-center justify-center transition active:scale-95"
-            >
-              ➤
-            </button>
-          </div>
+          <button
+            onClick={() => setResponse(null)}
+            className="mt-2 text-xs font-medium text-gray-500 hover:text-gray-700"
+          >
+            Dismiss
+          </button>
         </div>
+      )}
 
+      <div className="rounded-2xl border border-gray-200 bg-white p-3 shadow-xl">
+        <label htmlFor="court-chatbot-input" className="sr-only">
+          Ask a question about court services
+        </label>
+        <div className="flex items-center gap-2">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+            💬
+          </div>
+
+          <input
+            id="court-chatbot-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Ask a question about court services"
+            className="h-10 min-w-0 flex-1 rounded-xl border border-gray-200 bg-gray-50 px-3 text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <button
+            onClick={handleSend}
+            disabled={!input.trim()}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+            aria-label="Send question"
+          >
+            ➤
+          </button>
+        </div>
       </div>
     </div>
   );
